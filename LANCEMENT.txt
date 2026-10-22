@@ -1,5 +1,5 @@
 FoodBattle — Prototype local
-Prérequis : Docker avec Compose. Copier .env.example vers .env si besoin.
+Prérequis : Docker avec Compose. Copier .env.example vers .env puis renseigner DB_PASSWORD (obligatoire)
 Lancer : docker compose up --build
 Ouvrir : http://localhost:8080
 Arrêter : docker compose down
