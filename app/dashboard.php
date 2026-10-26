@@ -1,4 +1,4 @@
-<?php $title='Dashboard';require 'includes/header.php';require 'includes/db.php';
+<?php $title='Dashboard';require 'includes/header.php';require_admin();require 'includes/db.php'; // require admin permet de fermer l'accès du dashboard aux utilisateurs non connectés
 $restaurants=$db->query('SELECT * FROM establishments ORDER BY id')->fetchAll();
 if($_SERVER['REQUEST_METHOD']==='POST'){
 check_post();$name=trim($_POST['name']??'');$price=filter_input(INPUT_POST,'price',FILTER_VALIDATE_FLOAT);$eid=filter_input(INPUT_POST,'establishment_id',FILTER_VALIDATE_INT);$category=$_POST['category']??'';$description=trim($_POST['description']??'');
