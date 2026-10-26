@@ -2,6 +2,7 @@
 // Supprime un plat puis revient au dashboard avec un message.
 if (session_status() === PHP_SESSION_NONE) session_start();
 require 'includes/functions.php';
+require_admin(); // supprimer un plat est une action admin
 require 'includes/db.php';
 check_post();
 
