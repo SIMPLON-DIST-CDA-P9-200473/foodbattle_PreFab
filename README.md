@@ -17,9 +17,13 @@ cp .env.example .env
 docker compose up --build
 ```
 
+Avant le `docker compose up --build`, dans `.env`, remplacer la valeur de `DB_PASSWORD` par un mot de passe de son choix (obligatoire : l'app refuse de démarrer sans).
+
 Ouvrir **http://localhost:8080**
 
 Arrêter : `docker compose down`
+
+Les données sont fictives. Les photos sont chargées depuis Pexels : une connexion Internet est nécessaire pour les afficher.
 
 ## Pages
 
@@ -35,7 +39,7 @@ La base est créée automatiquement au premier lancement à partir de `database/
 
 Pour l’ouvrir avec DBeaver : hôte `localhost`, port `5432`, base `foodbattle`, utilisateur `foodbattle`.
 
-Pour repartir d’une base neuve : `docker compose down -v` puis `docker compose up -d`.
+Le script `init.sql` n'est exécuté que sur une base vide : après une modification de ce fichier, il faut repartir d'une base neuve avec `docker compose down -v` puis `docker compose up -d` (cela efface toutes les données, y compris les comptes admin).
 
 ## Espace admin
 
