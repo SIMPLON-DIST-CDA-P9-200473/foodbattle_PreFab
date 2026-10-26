@@ -9,6 +9,14 @@ function check_post() {
         http_response_code(403); exit('Requête refusée.');
     }
 }
+function require_admin() {
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    if (empty($_SESSION['admin_id'])) {
+        header('Location: /login.php');
+        exit;
+    }
+}
+
 function image_for($category) {
     $photos = ['burger'=>'1639557', 'tacos'=>'4958792', 'pizza'=>'315755'];
     $id = $photos[$category] ?? '1639557';
