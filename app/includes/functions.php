@@ -26,3 +26,11 @@ function image_for($category) {
     return 'https://images.pexels.com/photos/'.$id.'/pexels-photo-'.$id.'.jpeg?auto=compress&cs=tinysrgb&w=800';
 }
 function euro($n) { return number_format((float)$n, 2, ',', ' ') . ' €'; }
+
+const MIN_PRICE = 1;
+function valid_price($raw) {
+    $raw = trim((string)$raw);
+    if (!preg_match('/^\d{1,6}(\.\d{1,2})?$/', $raw)) return null;
+    $price = (float)$raw;
+    return $price >= MIN_PRICE ? $price : null;
+}
