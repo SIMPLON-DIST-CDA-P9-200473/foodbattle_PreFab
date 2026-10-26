@@ -9,6 +9,9 @@ function check_post() {
         http_response_code(403); exit('Requête refusée.');
     }
 }
+
+// Bloque les pages admin : redirige vers la connexion si aucun admin n'est connecté.
+// Le exit est indispensable : sans lui, la suite de la page s'exécuterait quand même.
 function require_admin() {
     if (session_status() === PHP_SESSION_NONE) session_start();
     if (empty($_SESSION['admin_id'])) {
