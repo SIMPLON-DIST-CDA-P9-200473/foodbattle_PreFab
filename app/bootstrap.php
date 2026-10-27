@@ -11,3 +11,8 @@ if (session_status() === PHP_SESSION_NONE) {
 //require_once évite de charger deux fois le même fichier.
 require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/repositories/DishRepository.php';
+require_once __DIR__ . '/repositories/EstablishmentRepository.php';
+require_once __DIR__ . '/repositories/RatingRepository.php';
+require_once __DIR__ . '/repositories/VoteRepository.php';
+require_once __DIR__ . '/repositories/AdminRepository.php';
