@@ -8,6 +8,9 @@ if(($_POST['action']??'')==='vote'){
 }elseif(($_POST['action']??'')==='rate'){
     $score=filter_input(INPUT_POST,'score',FILTER_VALIDATE_INT);$nick=trim($_POST['nickname']??'');$comment=trim($_POST['comment']??'');
     if(!$score||$score<1||$score>5||$nick===''||strlen($nick)>240||$comment===''||strlen($comment)>4000){http_response_code(422);exit('Vérifie les champs de ton avis.');}
-    $s=$db->prepare("INSERT INTO ratings(dish_id,nickname,score,comment,status) VALUES(?,?,?,?,'published')");$s->execute([$id,$nick,$score,$comment]);
+    // Modération : un nouvel avis est "en_attente", il ne s'affiche qu'après validation par un admin
+    $s=$db->prepare("INSERT INTO ratings(dish_id,nickname,score,comment,status) VALUES(?,?,?,?,'en_attente')");$s->execute([$id,$nick,$score,$comment]);
+    // Redirection propre à l'avis : le message affiché ne sera pas le même que pour un vote
+    header('Location: /plat.php?id='.$id.'&avis=1');exit;
 }else{http_response_code(400);exit('Action inconnue.');}
 header('Location: /plat.php?id='.$id.'&ok=1');exit;
