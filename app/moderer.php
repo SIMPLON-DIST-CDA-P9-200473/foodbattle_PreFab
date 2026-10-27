@@ -15,8 +15,6 @@ if (!$id || !in_array($decision, ['publie', 'refuse'], true)) {
     exit('Requête invalide.');
 }
 
-// Requête préparée : l'id et la décision ne sont jamais collés directement dans le SQL.
-// (évite de republier un avis refusé, ou de traiter deux fois le même avis après un double clic).
 $s = $db->prepare("UPDATE ratings SET status = ? WHERE id = ? AND status = 'en_attente'");
 $s->execute([$decision, $id]);
 
