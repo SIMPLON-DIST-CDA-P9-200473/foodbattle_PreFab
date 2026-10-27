@@ -34,3 +34,14 @@ function valid_price($raw) {
     $price = (float)$raw;
     return $price >= MIN_PRICE ? $price : null;
 }
+
+// Affiche une page complète : header + template de la page + footer.
+// $data contient les variables envoyées par le contrôleur, par exemple ['title' => 'Classement', 'rows' => $rows].
+function render(string $template, array $data = []): void
+{
+    extract($data); // transforme ['rows' => …] en variable $rows, utilisable dans le template
+    require __DIR__ . '/../templates/layout/header.php';
+    require __DIR__ . '/../templates/' . $template . '.php';
+    require __DIR__ . '/../templates/layout/footer.php';
+}
+
