@@ -1,4 +1,4 @@
-<?php $title='Modifier un plat';require 'includes/header.php';require 'includes/db.php';
+<?php $title='Modifier un plat';require 'includes/header.php';require_admin();require 'includes/db.php';// require admin permet de fermer l'accès à la page modifier aux utilisateurs non connecté
 $id=filter_input(INPUT_GET,'id',FILTER_VALIDATE_INT);$s=$db->prepare('SELECT * FROM dishes WHERE id=?');$s->execute([$id]);$d=$s->fetch();if(!$d){http_response_code(404);echo '<h1>Plat introuvable</h1>';require 'includes/footer.php';exit;}
 if($_SERVER['REQUEST_METHOD']==='POST'){
 check_post();$name=trim($_POST['name']??'');$price=valid_price($_POST['price']??'');
