@@ -61,3 +61,17 @@ tbody tr:hover{background:#fff4ea}
 
 /* Accessibilité : respecte le réglage "réduire les animations" du système */
 @media(prefers-reduced-motion:reduce){*{transition:none!important}.cards article:hover{transform:none}}
+
+/* ===== Messages après un vote ===== */
+
+/* Compteur de votes, à côté du bouton "Voter" */
+.vote-count{margin-left:12px;font-weight:bold;color:#784018}
+
+/* Message près du bouton : texte à gauche, bouton × à droite */
+.flash{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;transition:opacity .4s}
+
+/* Bouton × : discret, sans le fond orange des autres boutons */
+.flash-close{background:transparent;color:inherit;padding:0 8px;font-size:22px;line-height:1;border-radius:4px}
+.flash-close:hover{background:rgba(0,0,0,.08)}
+
+.flash.is-hiding{opacity:0}
