@@ -1,4 +1,10 @@
-<?php if (session_status() === PHP_SESSION_NONE) session_start();require 'includes/functions.php';check_post(); // en POST avec jeton CSRF : un simple lien permettrait à n'importe quel site de déconnecter l'admin
+<?php
 
-$_SESSION=[];session_destroy();
-header('Location: /');exit;
+require __DIR__ . '/bootstrap.php';
+// en POST avec jeton CSRF : un simple lien permettrait à n'importe quel site de déconnecter l'admin
+check_post();
+
+$_SESSION = [];
+session_destroy();
+header('Location: /');
+exit;

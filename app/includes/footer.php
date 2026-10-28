@@ -1,1 +1,0 @@
-</main><footer>FoodBattle — Le meilleur du quartier, selon vous.<br><small>Prototype pédagogique local · établissements, avis et données fictifs · photographies d’illustration</small></footer><script src="/assets/app.js"></script></body></html>
