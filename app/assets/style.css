@@ -62,6 +62,19 @@ tbody tr:hover{background:#fff4ea}
 /* Accessibilité : respecte le réglage "réduire les animations" du système */
 @media(prefers-reduced-motion:reduce){*{transition:none!important}.cards article:hover{transform:none}}
 
+/* ===== Menu : liens et bouton Connexion / Déconnexion alignés ===== */
+
+/* Le menu devient une ligne flexible : tous ses éléments sont centrés verticalement */
+nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+/* L'espacement vient maintenant de "gap" : on retire les anciennes marges */
+nav a,nav form{margin:0}
+
+/* Connexion et Déconnexion : un peu plus d'espace avant, et exactement la même hauteur */
+.nav-auth{margin-left:12px}
+nav button,nav a.button{line-height:1.2}
+
+/* Le texte du bouton Connexion reste blanc au survol (sinon : orange sur fond orange) */
+nav a.button:hover{color:#fff}
 /* ===== Messages après un vote ===== */
 
 /* Compteur de votes, à côté du bouton "Voter" */
