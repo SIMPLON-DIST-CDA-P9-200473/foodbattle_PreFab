@@ -7,11 +7,12 @@
 
 <h2 id="carte">À la carte</h2>
 <form class="filters" method="get">
-    <label>Rechercher
-        <input name="q" value="<?= h($search) ?>" placeholder="Un plat ou un établissement">
+    <?php // Accessibilité : "for" relie explicitement chaque label à l'id de son champ (plus fiable que la seule imbrication) ?>
+    <label for="q">Rechercher
+        <input id="q" name="q" value="<?= h($search) ?>" placeholder="Un plat ou un établissement">
     </label>
-    <label>Catégorie
-        <select name="categorie">
+    <label for="categorie">Catégorie
+        <select id="categorie" name="categorie">
             <option value="">Tout</option>
             <?php foreach (['burger' => 'Burgers', 'tacos' => 'Tacos', 'pizza' => 'Pizzas'] as $value => $label) : ?>
                 <option value="<?= $value ?>" <?= $category === $value ? 'selected' : '' ?>><?= $label ?></option>
