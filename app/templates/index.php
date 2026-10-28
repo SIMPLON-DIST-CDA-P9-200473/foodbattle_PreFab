@@ -32,7 +32,7 @@
                  onerror="this.onerror=null;this.src='/assets/images/placeholder.svg'">
             <div class="cardbody">
                 <span class="tag"><?= h($d['category']) ?></span>
-                <h3><a href="/plat.php?id=<?= (int) $d['id'] ?>"><?= h($d['name']) ?></a></h3>
+                <h3><?= h($d['name']) ?></h3>
                 <p><?= h($d['restaurant']) ?> · <?= h($d['city']) ?></p>
                 <p><?= h($d['description']) ?></p>
                 <p>
