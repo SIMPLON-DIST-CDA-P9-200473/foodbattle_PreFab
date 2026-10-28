@@ -5,13 +5,14 @@
     <a class="button" href="/classement.php">Voir le classement →</a>
 </section>
 
-<h2>À la carte</h2>
+<h2 id="carte">À la carte</h2>
 <form class="filters" method="get">
-    <label>Rechercher
-        <input name="q" value="<?= h($search) ?>" placeholder="Un plat ou un établissement">
+    <?php // Accessibilité : "for" relie explicitement chaque label à l'id de son champ (plus fiable que la seule imbrication) ?>
+    <label for="q">Rechercher
+        <input id="q" name="q" value="<?= h($search) ?>" placeholder="Un plat ou un établissement">
     </label>
-    <label>Catégorie
-        <select name="categorie">
+    <label for="categorie">Catégorie
+        <select id="categorie" name="categorie">
             <option value="">Tout</option>
             <?php foreach (['burger' => 'Burgers', 'tacos' => 'Tacos', 'pizza' => 'Pizzas'] as $value => $label) : ?>
                 <option value="<?= $value ?>" <?= $category === $value ? 'selected' : '' ?>><?= $label ?></option>
@@ -19,7 +20,7 @@
         </select>
     </label>
     <button>Rechercher</button>
-    <a href="/">Réinitialiser</a>
+    <a href="/" class="button button-secondary">Réinitialiser</a>
 </form>
 
 <p><?= count($dishes) ?> plat(s) trouvé(s)</p>
@@ -32,7 +33,7 @@
                  onerror="this.onerror=null;this.src='/assets/images/placeholder.svg'">
             <div class="cardbody">
                 <span class="tag"><?= h($d['category']) ?></span>
-                <h3><a href="/plat.php?id=<?= (int) $d['id'] ?>"><?= h($d['name']) ?></a></h3>
+                <h3><?= h($d['name']) ?></h3>
                 <p><?= h($d['restaurant']) ?> · <?= h($d['city']) ?></p>
                 <p><?= h($d['description']) ?></p>
                 <p>

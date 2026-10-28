@@ -10,7 +10,7 @@
 <header>
     <a class="logo" href="/">FoodBattle 🍔</a>
     <nav>
-        <a href="/">Découvrir</a>
+        <a href="/#carte">Découvrir</a>
         <a href="/classement.php">Classement</a>
         <?php // Les liens admin ne s'affichent qu'une fois connecté. Ce n'est pas une protection : c'est require_admin() qui bloque l'accès. ?>
         <?php if (!empty($_SESSION['admin_id'])) : ?>

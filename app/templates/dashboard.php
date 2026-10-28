@@ -36,7 +36,7 @@
                 <td><?= h($d['restaurant']) ?></td>
                 <td><?= euro($d['price']) ?></td>
                 <td>
-                    <a href="/modifier.php?id=<?= (int) $d['id'] ?>">Modifier</a>
+                    <a href="/modifier.php?id=<?= (int) $d['id'] ?>" class="button button-secondary">Modifier</a>
                     <?php // class et data-name utilisés par app.js pour la modale de confirmation ?>
                     <form method="post" action="/supprimer.php" class="delete-form" data-name="<?= h($d['name']) ?>">
                         <input type="hidden" name="token" value="<?= csrf() ?>">
