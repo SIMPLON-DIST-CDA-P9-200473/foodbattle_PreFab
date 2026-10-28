@@ -20,17 +20,20 @@
             <?php else : ?>
                 <button name="action" value="vote">♥ Voter pour ce plat</button>
             <?php endif ?>
+            <span class="vote-count"><?= $voteCount ?> vote<?= $voteCount > 1 ? 's' : '' ?></span>
         </form>
+        <?php // Message après un vote, affiché juste sous le bouton. Le nom du plat vient de la base (pas de l'URL) et passe par h(). ?>
+        <?php if ($voteStatus === 'ok') : ?>
+            <p class="message flash" role="status">Ton vote pour <?= h($dish['name']) ?> a bien été enregistré <button type="button" class="flash-close" aria-label="Fermer le message">×</button></p>
+        <?php elseif ($voteStatus === 'deja') : ?>
+            <p class="error flash" role="alert">Tu as déjà voté pour <?= h($dish['name']) ?> <button type="button" class="flash-close" aria-label="Fermer le message">×</button></p>
+        <?php elseif ($voteStatus === 'erreur') : ?>
+            <p class="error flash" role="alert">Ton vote n’a pas pu être enregistré, réessaie dans quelques instants <button type="button" class="flash-close" aria-label="Fermer le message">×</button></p>
+        <?php endif ?>
         <small>Le vote désigne ton favori ; la note exprime ton appréciation sur 5.</small>
     </div>
 </section>
 
-<?php if ($voteSaved) : ?>
-    <p class="message" role="status">Merci, ta contribution a été enregistrée.</p>
-<?php endif ?>
-<?php if ($alreadyVoted) : ?>
-    <p class="message">Vous avez déjà voté pour ce plat</p>
-<?php endif ?>
 <?php // Après l'envoi d'un avis : on prévient que l'avis n'est pas visible tout de suite (modération) ?>
 <?php if ($ratingSent) : ?>
     <p class="message" role="status">Ton avis sera publié après relecture.</p>

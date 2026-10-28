@@ -20,7 +20,8 @@ render('plat', [
     'dish' => $dish,
     'reviews' => findPublishedRatingsForDish($db, $id),
     'hasVoted' => hasVoted($db, $id, session_id()),
-    'voteSaved' => isset($_GET['ok']),
-    'alreadyVoted' => isset($_GET['deja']),
+    'voteCount' => countVotes($db, $id),
+    // Résultat du vote renvoyé par action.php : ok, deja ou erreur
+    'voteStatus' => $_GET['vote'] ?? '',
     'ratingSent' => isset($_GET['avis']),
 ]);

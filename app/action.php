@@ -12,11 +12,16 @@ if (!$id || findDishById($db, $id) === null) {
 $action = $_POST['action'] ?? '';
 
 if ($action === 'vote') {
-    if (!addVote($db, $id, session_id())) {
-        header('Location: /plat.php?id=' . $id . '&deja=1');
+    // Si la base plante, on prévient le visiteur au lieu d'afficher une page d'erreur
+    try {
+        $saved = addVote($db, $id, session_id());
+    } catch (PDOException $e) {
+        error_log('Vote impossible : ' . $e->getMessage()); // détail technique dans les logs serveur, jamais à l'écran
+        header('Location: /plat.php?id=' . $id . '&vote=erreur');
         exit;
     }
-    header('Location: /plat.php?id=' . $id . '&ok=1');
+    // false = ce visiteur avait déjà voté pour ce plat (contrainte UNIQUE)
+    header('Location: /plat.php?id=' . $id . '&vote=' . ($saved ? 'ok' : 'deja'));
     exit;
 }
 

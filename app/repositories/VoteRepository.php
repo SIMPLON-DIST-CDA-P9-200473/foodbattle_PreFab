@@ -20,3 +20,11 @@ function hasVoted(PDO $db, int $dishId, string $visitorKey): bool
 
     return $stmt->fetch() !== false;
 }
+
+function countVotes(PDO $db, int $dishId): int
+{
+    $stmt = $db->prepare('SELECT COUNT(*) FROM votes WHERE dish_id = :dishId');
+    $stmt->execute(['dishId' => $dishId]);
+
+    return (int) $stmt->fetchColumn();
+}
