@@ -44,7 +44,7 @@
     <input type="hidden" name="token" value="<?= csrf() ?>">
     <input type="hidden" name="id" value="<?= (int) $dish['id'] ?>">
     <input type="hidden" name="action" value="rate">
-    <label>Pseudo<input name="nickname" maxlength="60" required></label>
+    <label>Pseudo<input name="nickname" maxlength="<?= MAX_NICKNAME_LENGTH ?>" required></label>
     <label>Note
         <select name="score" required>
             <?php for ($i = 5; $i >= 1; $i--) : ?>
@@ -52,7 +52,7 @@
             <?php endfor ?>
         </select>
     </label>
-    <label>Commentaire<textarea name="comment" maxlength="1000" required></textarea></label>
+    <label>Commentaire<textarea name="comment" maxlength="<?= MAX_COMMENT_LENGTH ?>" required></textarea></label>
     <button>Publier mon avis</button>
 </form>
 

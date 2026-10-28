@@ -44,6 +44,9 @@ function euro($n)
 }
 
 const MIN_PRICE = 1;
+// Longueurs maximales d'un avis, en caractères (utilisées par le formulaire ET par action.php)
+const MAX_NICKNAME_LENGTH = 60; // = VARCHAR(60) de la colonne nickname en base
+const MAX_COMMENT_LENGTH = 1000;
 function valid_price($raw)
 {
     $raw = trim((string)$raw);
