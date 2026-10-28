@@ -103,3 +103,22 @@ nav a.button:hover{color:#fff}
 
 /* Réinitialiser : même décalage vertical que le bouton Rechercher, pour être aligné */
 .filters .button{margin-top:20px}
+
+/* ===== Responsive : aucune page ne déborde de l'écran (US-11) ===== */
+
+/* Mot très long sans espace (ex. « Délicieuuuu… ») : le navigateur peut le couper au lieu de déborder.
+   overflow-wrap est hérité : posé sur body, il s'applique à toute la page (avis, cartes, tableaux) */
+body{overflow-wrap:anywhere}
+
+/* Champs de formulaire : toute la largeur de leur conteneur (max-width:100% est déjà sur la ligne 1) */
+input,select,textarea{width:100%}
+
+/* Recherche : le champ texte s'étire, la catégorie garde sa taille, et tout passe à la ligne si l'écran est étroit */
+.filters label:first-child{flex:1 1 220px}
+.filters select{width:auto}
+
+/* Fenêtre de confirmation : 420px maximum, mais jamais plus large que l'écran (16px de marge de chaque côté) */
+.modal{max-width:min(420px,calc(100% - 32px))}
+
+/* Images : jamais plus larges que leur conteneur */
+img{max-width:100%}
