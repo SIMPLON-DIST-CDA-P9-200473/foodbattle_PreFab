@@ -30,9 +30,10 @@ if ($action === 'rate') {
     $nickname = trim($_POST['nickname'] ?? '');
     $comment = trim($_POST['comment'] ?? '');
 
+    // mb_strlen compte des caractères ; strlen compterait des octets (« é » = 2 octets, un emoji = 4)
     $isValid = $score && $score >= 1 && $score <= 5
-        && $nickname !== '' && strlen($nickname) <= 240
-        && $comment !== '' && strlen($comment) <= 4000;
+        && $nickname !== '' && mb_strlen($nickname) <= MAX_NICKNAME_LENGTH
+        && $comment !== '' && mb_strlen($comment) <= MAX_COMMENT_LENGTH;
 
     if (!$isValid) {
         http_response_code(422);
