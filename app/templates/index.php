@@ -5,7 +5,7 @@
     <a class="button" href="/classement.php">Voir le classement →</a>
 </section>
 
-<h2>À la carte</h2>
+<h2 id="carte">À la carte</h2>
 <form class="filters" method="get">
     <label>Rechercher
         <input name="q" value="<?= h($search) ?>" placeholder="Un plat ou un établissement">
