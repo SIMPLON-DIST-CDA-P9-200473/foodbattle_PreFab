@@ -88,3 +88,18 @@ nav a.button:hover{color:#fff}
 .flash-close:hover{background:rgba(0,0,0,.08)}
 
 .flash.is-hiding{opacity:0}
+
+/* ===== Bouton secondaire : Réinitialiser, Modifier ===== */
+
+/* Fond blanc, texte et bordure orange : moins visible que l'action principale */
+/* Padding réduit de 2px pour compenser la bordure : même hauteur que les autres boutons */
+.button-secondary{background:#fff;color:#9b3a10;border:2px solid #BC5B20;padding:8px 13px;line-height:1.2}
+
+/* Survol : fond beige du site, le texte reste foncé (contraste suffisant) */
+.button-secondary:hover{background:#ffe5c9;color:#9b3a10}
+
+/* Petite taille, pour s'aligner avec le bouton Supprimer dans le tableau du dashboard */
+.button-small{padding:4px 8px}
+
+/* Réinitialiser : même décalage vertical que le bouton Rechercher, pour être aligné */
+.filters .button{margin-top:20px}

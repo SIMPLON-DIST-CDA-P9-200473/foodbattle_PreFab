@@ -19,7 +19,7 @@
         </select>
     </label>
     <button>Rechercher</button>
-    <a href="/">Réinitialiser</a>
+    <a href="/" class="button button-secondary">Réinitialiser</a>
 </form>
 
 <p><?= count($dishes) ?> plat(s) trouvé(s)</p>
