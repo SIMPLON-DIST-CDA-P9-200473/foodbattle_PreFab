@@ -77,7 +77,7 @@ Aucun compte n'est fourni. Il faut en créer un après chaque base neuve :
    INSERT INTO admins (username, password_hash) VALUES ('mon_nom', 'LE_HASH');
    ```
 
-   ## Qualité du code (PSR-12)
+## Qualité du code (PSR-12)
 
 Le code PHP suit la norme PSR-12, vérifiée avec PHP_CodeSniffer (règles dans `phpcs.xml`).
 
