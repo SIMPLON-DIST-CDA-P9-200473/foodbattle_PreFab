@@ -1,8 +1,7 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) session_start();
-require 'includes/functions.php';
+
+require __DIR__ . '/bootstrap.php';
 require_admin(); // modérer un avis est une action admin
-require 'includes/db.php';
 check_post();
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
@@ -15,11 +14,8 @@ if (!$id || !in_array($decision, ['publie', 'refuse'], true)) {
     exit('Requête invalide.');
 }
 
-$s = $db->prepare("UPDATE ratings SET status = ? WHERE id = ? AND status = 'en_attente'");
-$s->execute([$decision, $id]);
-
-// Aucune ligne modifiée = l'avis n'existe pas ou a déjà été modéré
-if ($s->rowCount() === 0) {
+// false = l'avis n'existe pas ou a déjà été modéré
+if (!moderateRating($db, $id, $decision)) {
     header('Location: /moderation.php?error=notfound');
     exit;
 }

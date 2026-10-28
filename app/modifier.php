@@ -1,7 +1,39 @@
-<?php $title='Modifier un plat';require 'includes/header.php';require_admin();require 'includes/db.php';// require admin permet de fermer l'accès à la page modifier aux utilisateurs non connecté
-$id=filter_input(INPUT_GET,'id',FILTER_VALIDATE_INT);$s=$db->prepare('SELECT * FROM dishes WHERE id=?');$s->execute([$id]);$d=$s->fetch();if(!$d){http_response_code(404);echo '<h1>Plat introuvable</h1>';require 'includes/footer.php';exit;}
-if($_SERVER['REQUEST_METHOD']==='POST'){
-check_post();$name=trim($_POST['name']??'');$price=valid_price($_POST['price']??'');
-if($name!==''&&strlen($name)<=120&&$price!==null&&$price>=MIN_PRICE){$s=$db->prepare('UPDATE dishes SET name=? , price = ? WHERE id=?');$s->execute([$name,$price,$id]);$saved=true;$d['name']=$name;$d['price']=$price;}else{$error='Vérifie le nom et le prix.';}
+<?php
+
+require __DIR__ . '/bootstrap.php';
+require_admin(); // ferme l'accès à la page aux utilisateurs non connectés
+
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$dish = $id ? findDishById($db, $id) : null;
+
+if ($dish === null) {
+    http_response_code(404);
+    render('not_found', ['title' => 'Modifier un plat']);
+    exit;
 }
-?><p><a href="/dashboard.php">← Dashboard</a></p><h1>Modifier un plat</h1><?php if(isset($saved)): ?><p class="message">Modifications enregistrées.</p><?php endif ?><?php if(isset($error)): ?><p class="error" role="alert"><?= h($error) ?></p><?php endif ?><form method="post" class="reviewform"><input type="hidden" name="token" value="<?= csrf() ?>"><label>Nom<input name="name" value="<?= h($d['name']) ?>" maxlength="120" required></label><label>Prix<input name="price" type="number" step="0.01" min="<?= MIN_PRICE ?>" value="<?= h($d['price']) ?>" required></label><button>Enregistrer</button></form><?php require 'includes/footer.php'; ?>
+
+$error = null;
+$saved = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    check_post();
+    $name = trim($_POST['name'] ?? '');
+    $price = valid_price($_POST['price'] ?? '');
+
+    if ($name !== '' && strlen($name) <= 120 && $price !== null) {
+        updateDish($db, $id, $name, $price);
+        $saved = true;
+        // on réaffiche les nouvelles valeurs dans le formulaire
+        $dish['name'] = $name;
+        $dish['price'] = $price;
+    } else {
+        $error = 'Vérifie le nom et le prix.';
+    }
+}
+
+render('modifier', [
+    'title' => 'Modifier un plat',
+    'dish' => $dish,
+    'saved' => $saved,
+    'error' => $error,
+]);
