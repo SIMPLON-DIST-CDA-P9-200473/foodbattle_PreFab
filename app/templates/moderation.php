@@ -1,23 +1,29 @@
 <?php
 // Libellés lisibles à l'écran (en base, les valeurs restent sans accents)
-$labels=['en_attente'=>'En attente','publie'=>'Publié','refuse'=>'Refusé'];
+$labels = ['en_attente' => 'En attente','publie' => 'Publié','refuse' => 'Refusé'];
 ?>
 <h1>Avis à valider</h1>
 
 <?php // Messages affichés après une action (envoyés par moderer.php)  ?>
-<?php if ($done === 'publie') : ?><p class="message" role="status">L'avis a été publié.</p><?php endif ?>
-<?php if ($done === 'refuse') : ?><p class="message" role="status">L'avis a été refusé.</p><?php endif ?>
-<?php if ($notFound) : ?><p class="error" role="alert">Cet avis n'existe pas ou a déjà été modéré.</p><?php endif ?>
+<?php if ($done === 'publie') :
+    ?><p class="message" role="status">L'avis a été publié.</p><?php
+endif ?>
+<?php if ($done === 'refuse') :
+    ?><p class="message" role="status">L'avis a été refusé.</p><?php
+endif ?>
+<?php if ($notFound) :
+    ?><p class="error" role="alert">Cet avis n'existe pas ou a déjà été modéré.</p><?php
+endif ?>
 
 
 <h2>En attente (<?= count($pending) ?>)</h2>
-<?php if(!$pending): ?>
+<?php if (!$pending) : ?>
   <p>Aucun avis à relire.</p>
-<?php else: ?>
+<?php else : ?>
   <table>
     <thead><tr><th>Plat</th><th>Pseudo</th><th>Note</th><th>Avis</th><th>Actions</th></tr></thead>
     <tbody>
-    <?php foreach($pending as $r): ?>
+    <?php foreach ($pending as $r) : ?>
       <tr>
         <?php // Contenu saisi par les visiteurs : toujours échappé avec h() pour éviter une faille XSS (US-1) ?>
         <td><?= h($r['dish']) ?></td>
@@ -44,7 +50,7 @@ $labels=['en_attente'=>'En attente','publie'=>'Publié','refuse'=>'Refusé'];
 <table>
   <thead><tr><th>Plat</th><th>Pseudo</th><th>Avis</th><th>Statut</th></tr></thead>
   <tbody>
-  <?php foreach($history as $r): ?>
+  <?php foreach ($history as $r) : ?>
     <tr>
       <td><?= h($r['dish']) ?></td>
       <td><?= h($r['nickname']) ?></td>
