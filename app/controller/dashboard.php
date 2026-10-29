@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 require_admin(); // ferme l'accès du dashboard aux utilisateurs non connectés
 
 // Chargés avant le POST : la liste sert aussi à vérifier l'établissement choisi.
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($isValid) {
         createDish($db, $establishmentId, $name, $category, $description, $price);
-        header('Location: /dashboard.php?added=1');
+        header('Location: /controller/dashboard.php?added=1');
         exit;
     }
 

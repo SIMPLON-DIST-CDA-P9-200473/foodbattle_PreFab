@@ -32,7 +32,7 @@ endif ?>
         <td><?= h($r['comment']) ?></td>
         <td>
           <?php // Formulaire POST avec jeton CSRF : un simple lien pourrait être déclenché depuis un autre site ?>
-          <form method="post" action="/moderer.php">
+          <form method="post" action="/controller/moderer.php">
             <input type="hidden" name="token" value="<?= csrf() ?>">
             <input type="hidden" name="id" value="<?= (int)$r['id'] ?>">
             <?php // Deux boutons, un seul formulaire : seul le bouton cliqué envoie sa valeur "decision" ?>
@@ -61,4 +61,4 @@ endif ?>
   </tbody>
 </table>
 
-<p><a href="/dashboard.php">Retour au dashboard</a></p>
+<p><a href="/controller/dashboard.php">Retour au dashboard</a></p>

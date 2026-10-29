@@ -2,7 +2,7 @@
     <span>BURGERS · TACOS · PIZZAS</span>
     <h1>Qui mérite la première place ?</h1>
     <p>Explore les spots du quartier, note les plats et vote pour ton favori.</p>
-    <a class="button" href="/classement.php">Voir le classement →</a>
+    <a class="button" href="/controller/classement.php">Voir le classement →</a>
 </section>
 
 <h2 id="carte">À la carte</h2>
@@ -41,7 +41,7 @@
                     <span class="rating">★ <?= $d['average'] ? number_format((float) $d['average'], 1, ',', '') : '—' ?>/5</span>
                 </p>
                 <p><?= (int) $d['votes'] ?> vote(s)</p>
-                <a class="button" href="/plat.php?id=<?= (int) $d['id'] ?>">Découvrir et voter</a>
+                <a class="button" href="/controller/plat.php?id=<?= (int) $d['id'] ?>">Découvrir et voter</a>
             </div>
         </article>
     <?php endforeach ?>

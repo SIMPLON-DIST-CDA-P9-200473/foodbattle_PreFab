@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 $error = null;
 
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // nouvel identifiant de session à la connexion (protège contre la fixation de session)
         session_regenerate_id(true);
         $_SESSION['admin_id'] = $admin['id'];
-        header('Location: /dashboard.php');
+        header('Location: /controller/dashboard.php');
         exit;
     }
 

@@ -3,7 +3,7 @@
 <nav class="subnav">
     <a href="#plats">Plats</a> ·
     <a href="#etablissements">Établissements</a> ·
-    <a href="/moderation.php">Avis à valider</a>
+    <a href="/controller/moderation.php">Avis à valider</a>
 </nav>
 
 <?php if ($error !== null) : ?>
@@ -36,9 +36,9 @@
                 <td><?= h($d['restaurant']) ?></td>
                 <td><?= euro($d['price']) ?></td>
                 <td>
-                    <a href="/modifier.php?id=<?= (int) $d['id'] ?>" class="button button-secondary">Modifier</a>
+                    <a href="/controller/modifier.php?id=<?= (int) $d['id'] ?>" class="button button-secondary">Modifier</a>
                     <?php // class et data-name utilisés par app.js pour la modale de confirmation ?>
-                    <form method="post" action="/supprimer.php" class="delete-form" data-name="<?= h($d['name']) ?>">
+                    <form method="post" action="/controller/supprimer.php" class="delete-form" data-name="<?= h($d['name']) ?>">
                         <input type="hidden" name="token" value="<?= csrf() ?>">
                         <input type="hidden" name="id" value="<?= (int) $d['id'] ?>">
                         <button class="delete">Supprimer</button>

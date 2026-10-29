@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $dish = $id ? findDishWithEstablishment($db, $id) : null;

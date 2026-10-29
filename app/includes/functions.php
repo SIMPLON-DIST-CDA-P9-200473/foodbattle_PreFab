@@ -27,7 +27,7 @@ function require_admin()
         session_start();
     }
     if (empty($_SESSION['admin_id'])) {
-        header('Location: /login.php');
+        header('Location: /controller/login.php');
         exit;
     }
 }

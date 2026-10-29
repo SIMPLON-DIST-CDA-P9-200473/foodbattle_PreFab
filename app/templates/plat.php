@@ -12,7 +12,7 @@
         <p><?= h($dish['description']) ?></p>
         <h3><?= euro($dish['price']) ?></h3>
 
-        <form method="post" action="/action.php">
+        <form method="post" action="/controller/action.php">
             <input type="hidden" name="token" value="<?= csrf() ?>">
             <input type="hidden" name="id" value="<?= (int) $dish['id'] ?>">
             <?php if ($hasVoted) : ?>
@@ -40,7 +40,7 @@
 <?php endif ?>
 
 <h2>Donner mon avis</h2>
-<form class="reviewform" method="post" action="/action.php">
+<form class="reviewform" method="post" action="/controller/action.php">
     <input type="hidden" name="token" value="<?= csrf() ?>">
     <input type="hidden" name="id" value="<?= (int) $dish['id'] ?>">
     <input type="hidden" name="action" value="rate">

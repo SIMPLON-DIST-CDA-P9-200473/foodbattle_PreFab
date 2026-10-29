@@ -11,17 +11,17 @@
     <a class="logo" href="/">FoodBattle 🍔</a>
     <nav>
         <a href="/#carte">Découvrir</a>
-        <a href="/classement.php">Classement</a>
+        <a href="/controller/classement.php">Classement</a>
         <?php // Les liens admin ne s'affichent qu'une fois connecté. Ce n'est pas une protection : c'est require_admin() qui bloque l'accès. ?>
         <?php if (!empty($_SESSION['admin_id'])) : ?>
-            <a href="/dashboard.php">Dashboard</a>
+            <a href="/controller/dashboard.php">Dashboard</a>
             <?php // Déconnexion en POST avec jeton CSRF : un simple lien pourrait être déclenché depuis un autre site ?>
-            <form method="post" action="/logout.php" class="nav-auth">
+            <form method="post" action="/controller/logout.php" class="nav-auth">
                 <input type="hidden" name="token" value="<?= csrf() ?>">
                 <button>Déconnexion</button>
             </form>
         <?php elseif (($_SERVER['SCRIPT_NAME'] ?? '') !== '/login.php') : ?>
-            <a href="/login.php" class="button nav-auth">Connexion</a>
+            <a href="/controller/login.php" class="button nav-auth">Connexion</a>
         <?php endif ?>
     </nav>
 </header>
