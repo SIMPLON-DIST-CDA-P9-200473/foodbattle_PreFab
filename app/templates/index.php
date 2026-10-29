@@ -3,6 +3,8 @@
     <h1>Qui mérite la première place ?</h1>
     <p>Explore les spots du quartier, note les plats et vote pour ton favori.</p>
     <a class="button" href="/controller/classement.php">Voir le classement →</a>
+    <a class="button button-secondary" href="/controller/roue.php">🎰 Je ne sais pas quoi manger !</a>
+
 </section>
 
 <h2 id="carte">À la carte</h2>

@@ -82,6 +82,20 @@ function findAllDishesWithEstablishment(PDO $db): array
     return $stmt->fetchAll();
 }
 
+function findRandomDish(PDO $db): ?array
+{
+    $stmt = $db->prepare(
+        'SELECT d.id, d.name, d.category, e.name AS restaurant, e.city
+        FROM dishes d
+        JOIN establishments e ON e.id = d.establishment_id
+        ORDER BY RANDOM()
+        LIMIT 1'
+    );
+    $stmt->execute(); // aucun paramètre : rien ne vient de l'utilisateur
+
+    return $stmt->fetch() ?: null; // fetch() renvoie false si la table est vide
+}
+
 function createDish(PDO $db, int $establishmentId, string $name, string $category, string $description, float $price): void
 {
     $stmt = $db->prepare(
