@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 require_admin(); // ferme l'accès à la page aux utilisateurs non connectés
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);

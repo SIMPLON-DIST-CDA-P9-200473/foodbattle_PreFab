@@ -1,7 +1,7 @@
 <?php
 
 // Point de départ commun à toutes les pages : session, fonctions utilitaires, connexion à la base.
-// Chaque contrôleur commence par : require __DIR__ . '/bootstrap.php';
+// Chaque contrôleur commence par : require __DIR__ . '/../bootstrap.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

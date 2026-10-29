@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 check_post();
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
@@ -17,11 +17,11 @@ if ($action === 'vote') {
         $saved = addVote($db, $id, session_id());
     } catch (PDOException $e) {
         error_log('Vote impossible : ' . $e->getMessage()); // détail technique dans les logs serveur, jamais à l'écran
-        header('Location: /plat.php?id=' . $id . '&vote=erreur');
+        header('Location: /controller/plat.php?id=' . $id . '&vote=erreur');
         exit;
     }
     // false = ce visiteur avait déjà voté pour ce plat (contrainte UNIQUE)
-    header('Location: /plat.php?id=' . $id . '&vote=' . ($saved ? 'ok' : 'deja'));
+    header('Location: /controller/plat.php?id=' . $id . '&vote=' . ($saved ? 'ok' : 'deja'));
     exit;
 }
 
@@ -43,7 +43,7 @@ if ($action === 'rate') {
     // Modération : un nouvel avis est "en_attente", il ne s'affiche qu'après validation par un admin
     createRating($db, $id, $nickname, $score, $comment);
     // Redirection propre à l'avis : le message affiché ne sera pas le même que pour un vote
-    header('Location: /plat.php?id=' . $id . '&avis=1');
+    header('Location: /controller/plat.php?id=' . $id . '&avis=1');
     exit;
 }
 

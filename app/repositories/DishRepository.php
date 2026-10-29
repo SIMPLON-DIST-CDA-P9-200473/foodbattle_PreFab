@@ -19,7 +19,7 @@ function findDishes(PDO $db, string $search, ?string $category): array
         $params['dishName'] = '%' . $search . '%';
         $params['restaurantName'] = '%' . $search . '%';
     }
-    if ($category !== null) {
+    if ($category !== null) {   //correspond au filtre à côté de la section recherche
         $sql .= ' AND d.category = :category';
         $params['category'] = $category;
     }
@@ -31,7 +31,7 @@ function findDishes(PDO $db, string $search, ?string $category): array
     return $stmt->fetchAll();
 }
 
-function findTopDishes(PDO $db, int $limit = 10): array
+function findTopDishes(PDO $db, int $limit = 10): array  //permet de trier les plats sur la page classement
 {
     $stmt = $db->prepare(
         "SELECT d.id, d.name, d.category, e.name AS restaurant,
@@ -48,7 +48,7 @@ function findTopDishes(PDO $db, int $limit = 10): array
     return $stmt->fetchAll();
 }
 
-function findDishWithEstablishment(PDO $db, int $id): ?array
+function findDishWithEstablishment(PDO $db, int $id): ?array    //affiche la page de détail du plat avec les infos du restaurant
 {
     $stmt = $db->prepare(
         'SELECT d.*, e.name AS restaurant, e.city, e.address

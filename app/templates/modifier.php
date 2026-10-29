@@ -1,4 +1,4 @@
-<p><a href="/dashboard.php">← Dashboard</a></p>
+<p><a href="/controller/dashboard.php">← Dashboard</a></p>
 <h1>Modifier un plat</h1>
 
 <?php if ($saved) : ?>

@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 require_admin(); // modérer un avis est une action admin
 check_post();
 
@@ -16,9 +16,9 @@ if (!$id || !in_array($decision, ['publie', 'refuse'], true)) {
 
 // false = l'avis n'existe pas ou a déjà été modéré
 if (!moderateRating($db, $id, $decision)) {
-    header('Location: /moderation.php?error=notfound');
+    header('Location: /controller/moderation.php?error=notfound');
     exit;
 }
 
-header('Location: /moderation.php?done=' . $decision);
+header('Location: /controller/moderation.php?done=' . $decision);
 exit;

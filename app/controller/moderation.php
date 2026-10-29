@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 require_admin(); // page réservée aux admins (US-2)
 
 render('moderation', [
