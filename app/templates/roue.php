@@ -1,7 +1,7 @@
 <section class="intro">
     <span>LA ROUE DU DESTIN</span>
     <h1>Je ne sais pas quoi manger !</h1>
-    <p>Laisse le hasard choisir ton prochain plat parmi ceux du quartier.</p>
+    <p>Laisse le hasard choisir ton prochain plat.</p>
 </section>
 
 <?php if ($error) : ?>
@@ -15,13 +15,23 @@
     <a class="button button-secondary" href="/">Retour à la carte</a>
 
 <?php else : ?>
-    <?php // data-names : liste des plats pour l'animation (JSON échappé avec h() pour rester dans l'attribut) ?>
-    <?php // aria-hidden : un lecteur d'écran ne lit pas chaque nom qui défile, seulement le résultat ?>
-    <div id="wheel" class="wheel" aria-hidden="true"
-         data-names="<?= h(json_encode($names)) ?>"
-         data-winner="<?= h($winner['name']) ?>"><?= h($winner['name']) ?></div>
+    <?php // La roue : une part par plat. --n (nombre de parts) et --i (numéro de la part) servent au CSS pour calculer les angles ?>
+    <?php // aria-hidden : la roue est décorative, le résultat est annoncé dans #wheel-result ?>
+    <div class="wheel-box" aria-hidden="true">
+        <div class="wheel-pointer"></div>
+        <div id="wheel" class="wheel" style="--n: <?= count($names) ?>"
+             data-count="<?= count($names) ?>" data-winner-index="<?= (int) $winnerIndex ?>">
+            <?php foreach ($names as $i => $name) : ?>
+                <span class="wheel-label" style="--i: <?= (int) $i ?>"><?= h($name) ?></span>
+            <?php endforeach ?>
+        </div>
+    </div>
 
-    <?php // Sans JavaScript, ce bloc reste visible : la fonctionnalité marche quand même ?>
+    <p class="wheel-actions">
+        <?php // Caché par défaut (hidden) : c'est app.js qui l'affiche. Sans JS, le résultat est visible directement ?>
+        <button id="wheel-spin" type="button" hidden>🎡 Lancer la roue !</button>
+    </p>
+
     <div id="wheel-result" class="wheel-result" aria-live="polite">
         <span class="tag"><?= h($winner['category']) ?></span>
         <h2>🎉 <?= h($winner['name']) ?></h2>
@@ -30,3 +40,4 @@
         <a class="button button-secondary" href="/controller/roue.php">🎲 Retenter ma chance</a>
     </div>
 <?php endif ?>
+
