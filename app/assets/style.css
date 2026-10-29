@@ -122,3 +122,40 @@ input,select,textarea{width:100%}
 
 /* Images : jamais plus larges que leur conteneur */
 img{max-width:100%}
+
+/* L'attribut hidden doit toujours cacher, même sur un .button (qui force display:inline-block) */
+[hidden]{display:none!important}
+
+/* Roue du destin : conteneur carré, centré, qui rétrécit sur petit écran */
+.wheel-box{position:relative;width:min(360px,100%);aspect-ratio:1;margin:24px auto}
+
+/* La roue : parts alternées orange/beige. 360deg / --n = taille d'une part */
+.wheel{position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;border:6px solid #784018;box-shadow:0 6px 16px rgba(0,0,0,.15);
+    background:repeating-conic-gradient(#BC5B20 0 calc(360deg / var(--n)),#ffe5c9 0 calc(720deg / var(--n)));
+    transition:transform 5s cubic-bezier(.15,.85,.25,1)} /* démarre vite, ralentit longtemps : effet de suspense */
+
+/* Noms des plats : chaque étiquette part du centre et pointe vers le milieu de sa part */
+.wheel-label{position:absolute;top:50%;left:50%;width:50%;margin-top:-.6em;padding:0 12px 0 30px;line-height:1.2;
+    font-size:12px;font-weight:bold;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff;
+    transform-origin:0 50%;transform:rotate(calc((var(--i) + .5) * 360deg / var(--n) - 90deg))}
+.wheel-label:nth-child(even){color:#784018} /* texte foncé sur les parts beiges */
+
+/* Rond central décoratif */
+.wheel-box::after{content:'';position:absolute;top:50%;left:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#fff;border:4px solid #784018}
+
+/* Flèche fixe en haut : c'est elle qui désigne le gagnant */
+.wheel-pointer{position:absolute;top:-8px;left:50%;z-index:1;transform:translateX(-50%);border-left:16px solid transparent;border-right:16px solid transparent;border-top:30px solid #252525}
+
+.wheel-actions{text-align:center}
+
+/* Carte du plat gagnant */
+.wheel-result{max-width:600px;margin:0 auto;padding:20px;text-align:center;background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.wheel-result .button{margin:6px}
+.wheel-result.is-revealed{animation:wheel-win .6s ease-out}
+@keyframes wheel-win{0%{transform:scale(.8);opacity:0}60%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+
+/* Mobile : noms plus petits, boutons pleine largeur */
+@media(max-width:700px){.wheel-label{font-size:10px;padding-left:26px}.wheel-result .button{display:block;margin:8px 0}}
+
+/* Mouvement réduit : pas d'animation d'apparition (la rotation est déjà coupée par la règle globale ligne 63) */
+@media(prefers-reduced-motion:reduce){.wheel-result.is-revealed{animation:none}}

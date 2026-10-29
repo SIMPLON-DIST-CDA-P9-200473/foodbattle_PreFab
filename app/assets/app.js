@@ -46,3 +46,45 @@ if (window.location.search.indexOf('vote=') !== -1) {
     url.searchParams.delete('vote');
     window.history.replaceState(null, '', url);
 }
+
+// Roue du destin : la roue tourne et s'arrête sur le plat déjà tiré au sort par PHP.
+// Le JS ne décide rien : il calcule seulement l'angle pour que la flèche tombe sur le gagnant.
+var wheel = document.getElementById('wheel');
+
+if (wheel) {
+    var count = Number(wheel.dataset.count);             // nombre de parts
+    var winnerIndex = Number(wheel.dataset.winnerIndex); // position du gagnant dans la roue
+    var result = document.getElementById('wheel-result');
+    var spinButton = document.getElementById('wheel-spin');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Avec JS : on cache le résultat et on montre le bouton pour lancer la roue
+    result.hidden = true;
+    spinButton.hidden = false;
+
+    var showResult = function () {
+        result.hidden = false;
+        result.classList.add('is-revealed'); // petite animation d'apparition (style.css)
+    };
+
+    spinButton.addEventListener('click', function () {
+        spinButton.disabled = true; // un seul lancer par tirage
+
+        var slice = 360 / count;                          // taille d'une part, en degrés
+        var middle = (winnerIndex + 0.5) * slice;         // milieu de la part gagnante (0° = en haut)
+        var offset = (Math.random() - 0.5) * slice * 0.6; // léger décalage : la flèche ne tombe pas toujours pile au centre
+        // 5 tours complets, puis on recule de "middle" : la part gagnante finit sous la flèche
+        var angle = 5 * 360 - middle + offset;
+
+        if (reduceMotion) {
+            // Mouvement réduit demandé : pas de rotation animée, résultat immédiat
+            wheel.style.transform = 'rotate(' + angle + 'deg)';
+            showResult();
+            return;
+        }
+
+        // transitionend : déclenché quand la rotation CSS est terminée. once : écouté une seule fois
+        wheel.addEventListener('transitionend', showResult, { once: true });
+        wheel.style.transform = 'rotate(' + angle + 'deg)'; // lance la rotation (transition dans style.css)
+    });
+}
