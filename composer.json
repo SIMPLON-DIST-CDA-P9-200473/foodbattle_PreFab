@@ -1,0 +1,12 @@
+{
+    "name": "foodbattle/app",
+    "description": "FoodBattle - prototype pédagogique",
+    "type": "project",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^4.0"
+    },
+    "scripts": {
+        "lint": "phpcs",
+        "fix": "phpcbf"
+    }
+}
